@@ -215,7 +215,7 @@ extern struct task_group root_task_group;
 	},								\
 	.thread_group	= LIST_HEAD_INIT(tsk.thread_group),		\
 	.thread_node	= LIST_HEAD_INIT(init_signals.thread_head),	\
-	.nice_inc = 0,	\
+	.nice_inc = 5,	\
 	INIT_IDS							\
 	INIT_PERF_EVENTS(tsk)						\
 	INIT_TRACE_IRQFLAGS						\
