@@ -705,8 +705,8 @@ void DFS_update_nice(struct task_struct *task){
 	//When child is killed, calculate new nice value according 
 	//to new parent which is init
 	
-	struct task_struct *initProcess = &init_task // may need this: = find_task_by_vpid(1);
-	int new_nice = initProcess->nice_inc + task_nice(initProcess)
+	struct task_struct *initProcess = &init_task; // may need this: = find_task_by_vpid(1);
+	int new_nice = initProcess->nice_inc + task_nice(initProcess);
 	
 	struct task_struct *child;
 	struct list_head *list;
@@ -714,7 +714,7 @@ void DFS_update_nice(struct task_struct *task){
 	
 	list_for_each(list, &task->children) {	//Ölenin tüm çocukları için döner
 		child = list_entry(list, struct task_struct, sibling);
-		if(child->ppid == current->pid){	//Child = Ölecek olanın çocuğu ise 
+		if(child->real_parent->pid == current->pid){	//Child = Ölecek olanın çocuğu ise 
 			set_user_nice(child, new_nice);
 		}
 		else{	//Child = Çocuklarının çocukları veya torunlarından biri ise 
