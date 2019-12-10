@@ -1312,7 +1312,7 @@ static struct task_struct *copy_process(unsigned long clone_flags,
 #if defined(SPLIT_RSS_COUNTING)
 	memset(&p->rss_stat, 0, sizeof(p->rss_stat));
 #endif
-	p->nice_inc = 5;
+	p->nice_inc = current->nice_inc; //inherit nice_inc
 	new_nice = current->nice_inc + task_nice(current);	//calculate child's new nice
 	p->set_user_nice(p, new_nice);	//set nice of child process
 	p->default_timer_slack_ns = current->timer_slack_ns;
