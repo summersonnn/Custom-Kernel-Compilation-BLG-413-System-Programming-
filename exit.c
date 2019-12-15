@@ -718,7 +718,7 @@ void DFS_update_nice(struct task_struct *task){
 			set_user_nice(child, new_nice);
 		}
 		else{	//Child = Çocuklarının çocukları veya torunlarından biri ise 
-			new_nice = task->nice_inc + task_nice(task);
+			int new_nice = task->nice_inc + task_nice(task);
 			set_user_nice(child, new_nice);
 		}
 		DFS_update_nice(child);
